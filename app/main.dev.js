@@ -12,6 +12,8 @@ const MenuBuilder = require('./menu');
 
 let mainWindow = null;
 
+app.allowRendererProcessReuse = false;
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -64,7 +66,9 @@ app.on('ready', async () => {
     height: 728,
     backgroundColor: "#f0f2f5",
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true
     }
   });
 
